@@ -1,56 +1,36 @@
-#include <string>
 #include <vector>
 #include <iostream>
 
 using namespace std;
 
 int solution(vector<vector<int>> dots) {
-    int answer = 0;
-    vector<int> line1;
-    int rad1;
-    vector<int> line2;
-    int rad2;
+    std::vector<int> line1;
+    std::vector<int> line2;
     for (int i = 0;i < 3;i++) {
-        switch (i) {
-        case 0:
-            line1 = { dots[0][0] - dots[1][0], dots[0][1] - dots[1][1] };
-            line2 = { dots[2][0] - dots[3][0], dots[2][1] - dots[3][1] };
-            rad1 = line1[1] / line1[0];
-            rad2 = line2[1] / line2[0];
-            if (rad1 == rad2) {
-                answer = 1;
-            }
-            break;
-        case 1:
-            line1 = { dots[0][0] - dots[2][0], dots[0][1] - dots[2][1] };
-            line2 = { dots[1][0] - dots[3][0], dots[1][1] - dots[3][1] };
-            rad1 = line1[1] / line1[0];
-            rad2 = line2[1] / line2[0];
-            if (rad1 == rad2) {
-                answer = 1;
-            }
-            break;
-        case 2:
-            line1 = { dots[0][0] - dots[3][0], dots[0][1] - dots[3][1] };
-            line2 = { dots[1][0] - dots[2][0], dots[1][1] - dots[2][1] };
-            rad1 = line1[1] / line1[0];
-            rad2 = line2[1] / line2[0];
-            if (rad1 == rad2) {
-                answer = 1;
-            }
-            break;
-        }
+        if (dots[0][0] > dots[i + 1][0])
+            line1 = { dots[0][0] - dots[i + 1][0], dots[0][1] - dots[i + 1][1] };
+        else if (dots[0][0] < dots[i + 1][0])
+            line1 = { dots[i + 1][0] - dots[0][0], dots[i + 1][1] - dots[0][1] };
+        if (dots[i == 0 ? 2 : 1][0] > dots[i == 2 ? i : 3][0])
+            line2 = { dots[i == 0 ? 2 : 1][0] - dots[i == 2 ? i : 3][0], dots[i == 0 ? 2 : 1][1] - dots[i == 2 ? i : 3][1] };
+        else if (dots[i == 0 ? 2 : 1][0] < dots[i == 2 ? i : 3][0])
+            line2 = { dots[i == 2 ? i : 3][0] - dots[i == 0 ? 2 : 1][0], dots[i == 2 ? i : 3][1] - dots[i == 0 ? 2 : 1][1] };
+        auto rad1 = line1[1] / line1[0];
+        auto rad2 = line2[1] / line2[0];
+        if (rad1 == rad2)
+            return 1;
+
     }
-    return answer;
+    return 0;
 }
 
 
-int main() {
-    vector<vector<int>> dots1 = { {1, 4}, {9, 2}, {3, 8}, {11, 6} };
-    vector<vector<int>> dots2 = { {3, 5},{4, 1},{2, 4},{5, 10} };
-    int answer1 = solution(dots1);
-    int answer2 = solution(dots2);
-    std::cout << answer1 << std::endl;
-    std::cout << answer2 << std::endl;
-    
-}
+    int main() {
+        vector<vector<int>> dots1 = { {1, 4}, {9, 2}, {3, 8}, {11, 6} };
+        vector<vector<int>> dots2 = { {3, 5},{4, 1},{2, 4},{5, 10} };
+        int answer1 = solution(dots1);
+        int answer2 = solution(dots2);
+        std::cout << answer1 << std::endl;
+        std::cout << answer2 << std::endl;
+
+    }
