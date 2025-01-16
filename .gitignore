@@ -1,0 +1,7 @@
+*.VC
+*.VC.*
+x64/
+*.opendb
+.vs/
+*.aps
+*.log

@@ -1,0 +1,22 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+int solution(int n, int k) {
+    int answer;
+    answer = n * 12000 + (k - int(n / 10)) * 2000;
+    return answer;
+}
+
+int main() {
+    int n[2] = { 10, 64 };
+    int k[2] = { 3, 6 };
+    int answer;
+    for (int i = 0;i < 2;i++) {
+        answer = solution(n[i], k[i]);
+        std::cout << answer << std::endl;
+    }
+    return 0;
+}
